@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "sourceMap": true,
     "noImplicitAny": true
   },
-  "files": [ "typings/index.d.ts" ]
+  "filesGlob": [
+    "typings/index.d.ts",
+    "src/**/*.ts"
+  ]
 }

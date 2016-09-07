@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "compile": "tsc src/index.ts",
-    "prestart": "npm run compile",
+    "prestart": "tsc",
     "start": "node ."
   },
   "author": "jaburns",
