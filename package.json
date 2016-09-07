@@ -1,0 +1,16 @@
+{
+  "name": "test-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "compile": "tsc src/index.ts",
+    "prestart": "npm run compile",
+    "start": "node ."
+  },
+  "author": "jaburns",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
