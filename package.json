@@ -5,11 +5,17 @@
   "main": "src/index.js",
   "scripts": {
     "prestart": "tsc",
-    "start": "node ."
+    "start": "node .",
+    "client": "node node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react ] ] client/src/index.jsx -o client/public/app.js"
   },
   "author": "jaburns",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "express": "^4.14.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   }
 }
