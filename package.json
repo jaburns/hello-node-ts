@@ -2,19 +2,17 @@
   "name": "test-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "server/src/index.js",
   "scripts": {
-    "prestart": "tsc",
-    "start": "node .",
-    "client": "node node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react ] ] client/src/index.jsx -o client/public/app.js"
+    "server": "pushd server && tsc && node src/index.js",
+    "client": "pushd client && tsc && popd && node node_modules/browserify/bin/cmd.js client/src/index.js -o client/build/app.js"
   },
   "author": "jaburns",
   "license": "MIT",
   "dependencies": {
-    "babel-preset-react": "^6.11.1",
-    "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "express": "^4.14.0",
+    "jquery-browserify": "^1.8.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   }

@@ -1,6 +1,7 @@
-
 node_modules/
-typings/
-src/**/*.js
+client/typings/
+server/typings/
+client/src/**/*.js
+server/src/**/*.js
 **/*.log
-client/public/*.js
+client/build/

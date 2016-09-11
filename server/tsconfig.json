@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "noImplicitReturns": true
+  },
+  "filesGlob": [
+    "typings/index.d.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "client"
+  ]
+}
