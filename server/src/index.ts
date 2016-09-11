@@ -1,14 +1,18 @@
 import * as express from 'express';
 import {Request, Response} from 'express';
+import {CommentItem} from './shared/api_types';
 
 let app = express();
 
-app.use(express['static']('client/public'));
-app.use(express['static']('client/build'));
+app.use(express['static']('../client/public'));
+app.use(express['static']('../client/build'));
 
-async function slowResponse(): Promise<string> {
+async function getComments(): Promise<CommentItem[]> {
     await delay(500);
-    return 'Hello world!';
+    return [
+        {id: 1, author: "Person One", text: "This is one comment"},
+        {id: 2, author: "Second Person", text: "This is another comment"}
+    ];
 }
 
 function delay(time: number): Promise<void> {
@@ -16,16 +20,13 @@ function delay(time: number): Promise<void> {
 }
 
 app.get('/', function(req: Request, res: Response): void {
-    slowResponse().then(msg => {
-        res.send(msg);
-    });
+    res.redirect('/index.html');
 });
 
 app.get('/comments', function(req: Request, res: Response): void {
-    res.json([
-        {id: 1, author: "Person One", text: "This is one comment"},
-        {id: 2, author: "Second Person", text: "This is another comment"}
-    ]);
+    getComments().then(comments => {
+        res.json(comments);
+    });
 });
 
 app.listen(3000, function(): void {

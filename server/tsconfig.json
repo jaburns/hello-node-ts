@@ -8,8 +8,5 @@
   "filesGlob": [
     "typings/index.d.ts",
     "src/**/*.ts"
-  ],
-  "exclude": [
-    "client"
   ]
 }

@@ -3,5 +3,6 @@ client/typings/
 server/typings/
 client/src/**/*.js
 server/src/**/*.js
+shared/**/*.js
 **/*.log
 client/build/

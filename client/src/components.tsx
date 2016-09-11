@@ -1,11 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-interface CommentItem {
-    id: number;
-    author: string;
-    text: string;
-}
+import {CommentItem} from './shared/api_types';
 
 interface CommentProps { comment: CommentItem }
 
