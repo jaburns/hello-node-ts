@@ -1,8 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {CommentList} from './components';
+import { Hello, CommentList } from './components';
+import { Router, Route, browserHistory } from 'react-router'
 
 ReactDOM.render(
-    <CommentList url="/comments" />,
+    <Router history={browserHistory}>
+        <Route path="/" component={Hello}/>
+        <Route path="/comments" component={CommentList}/>
+    </Router>,
     document.getElementById('app')
 );

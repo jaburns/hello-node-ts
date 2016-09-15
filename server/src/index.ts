@@ -1,11 +1,21 @@
+import * as path from 'path';
 import * as express from 'express';
-import {Request, Response} from 'express';
-import {CommentItem} from './shared/api_types';
+import { Request, Response } from 'express';
+import { CommentItem } from '../../shared/api_types';
+
+let VIEW_ROUTES: string[] = [
+    '/',
+    '/comments'
+];
+
+function clientPath(p: string): string {
+    return path.join(__dirname + '/../../client/', p);
+}
 
 let app = express();
 
-app.use(express['static']('../client/public'));
-app.use(express['static']('../client/build'));
+app.use(express['static'](clientPath('public')));
+app.use(express['static'](clientPath('build')));
 
 async function getComments(): Promise<CommentItem[]> {
     await delay(500);
@@ -19,11 +29,11 @@ function delay(time: number): Promise<void> {
     return new Promise<void>(resolve => { setTimeout(resolve, time); });
 }
 
-app.get('/', function(req: Request, res: Response): void {
-    res.redirect('/index.html');
+app.get(VIEW_ROUTES, function(req: Request, res: Response): void {
+    res.sendFile(clientPath('public/index.html'));
 });
 
-app.get('/comments', function(req: Request, res: Response): void {
+app.get('/api/comments', function(req: Request, res: Response): void {
     getComments().then(comments => {
         res.json(comments);
     });

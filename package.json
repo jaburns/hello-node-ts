@@ -4,15 +4,19 @@
   "description": "",
   "main": "server/src/index.js",
   "scripts": {
-    "server": "pushd server && tsc && node src/index.js",
-    "client": "pushd client && tsc && popd && node node_modules/browserify/bin/cmd.js client/src/index.js -o client/build/app.js"
+    "server": "pushd server && tsc && popd && node server/src/index.js",
+    "client": "cd client && webpack"
   },
   "author": "jaburns",
   "license": "MIT",
   "dependencies": {
-    "browserify": "^13.1.0",
     "express": "^4.14.0",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "react-router": "^2.8.0"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2"
   }
 }
