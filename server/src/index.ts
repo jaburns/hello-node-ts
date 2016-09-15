@@ -29,7 +29,7 @@ function delay(time: number): Promise<void> {
     return new Promise<void>(resolve => { setTimeout(resolve, time); });
 }
 
-app.get(VIEW_ROUTES, function(req: Request, res: Response): void {
+app.use(VIEW_ROUTES, function(req: Request, res: Response): void {
     res.sendFile(clientPath('public/index.html'));
 });
 
