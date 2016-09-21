@@ -2,6 +2,9 @@ import * as path from 'path';
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { CommentItem } from '../../shared/api_types';
+import { update } from '../../shared/utils';
+
+
 
 let VIEW_ROUTES: string[] = [
     '/',
@@ -34,6 +37,7 @@ app.use(VIEW_ROUTES, function(req: Request, res: Response): void {
 });
 
 app.get('/api/comments', function(req: Request, res: Response): void {
+
     getComments().then(comments => {
         res.json(comments);
     });

@@ -4,6 +4,7 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "experimentalDecorators": true,
     "jsx": "react"
   },
   "filesGlob": [

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Hello, CommentList } from './components';
-import { Router, Route, browserHistory } from 'react-router'
+import { render } from 'react-dom';
+import { Store, createStore } from 'redux';
 
-ReactDOM.render(
-    <Router history={browserHistory}>
-        <Route path="/" component={Hello}/>
-        <Route path="/comments" component={CommentList}/>
-    </Router>,
+import { createProvider } from './provider';
+import { reducer } from './reducers';
+import { App } from './App';
+
+const store = createStore(reducer);
+const Provider = createProvider();
+
+render(
+    <Provider store={store} target={App} />,
     document.getElementById('app')
 );
