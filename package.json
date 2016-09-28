@@ -4,18 +4,23 @@
   "description": "",
   "main": "server/src/index.js",
   "scripts": {
-    "server": "pushd server && tsc && popd && node server/src/index.js",
-    "client": "cd client && webpack"
+    "client": "cd client && webpack",
+    "start": "pushd server && tsc && popd && node server/src/index.js"
   },
   "author": "jaburns",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-router": "^2.8.0"
+    "express": "^4.14.0"
   },
   "devDependencies": {
+    "@types/express": "^4.0.33",
+    "@types/node": "^6.0.41",
+    "@types/react": "^0.14.37",
+    "@types/react-dom": "^0.14.17",
+    "@types/react-redux": "^4.4.32",
+    "@types/react-router": "^2.0.36",
+    "@types/redux": "^3.5.30",
+    "@types/redux-actions": "^0.8.30",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2"
   }
