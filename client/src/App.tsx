@@ -3,30 +3,34 @@ import { connect, MapDispatchToPropsObject } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TodosState } from './state';
-import { addTodo, completeTodo, deleteTodo } from './actions';
+
+import {
+    addTodo, AddTodoFunc,
+    completeTodo, CompleteTodoFunc,
+    deleteTodo, DeleteTodoFunc
+} from './actions';
 
 interface StateProps {
     todos: TodosState;
 }
 
 interface DispatchProps {
-    addTodo(text: string): any;
-    completeTodo(id: number): any;
-    deleteTodo(id: number): any;
+    addTodo: AddTodoFunc;
+    completeTodo: CompleteTodoFunc;
+    deleteTodo: DeleteTodoFunc;
 }
 
-type Props = StateProps & DispatchProps;
+export const App = connect(
+    (state: TodosState) => ({
+        todos: state
+    }),{
+        addTodo,
+        completeTodo,
+        deleteTodo
+    }
+)(_App);
 
-const mapStateToProps = (state: TodosState): StateProps => ({
-    todos: state
-});
-
-const mapDispatchToProps = {
-    addTodo, completeTodo, deleteTodo
-};
-
-@connect<StateProps, DispatchProps, any>(mapStateToProps, mapDispatchToProps)
-export class App extends React.Component<Props, any> {
+class _App extends React.Component<StateProps & DispatchProps, any> {
     render() {
         let vals = this.props.todos.map(todo => <div>
             <button onClick={() => this.props.deleteTodo(todo.id)}> X </button>

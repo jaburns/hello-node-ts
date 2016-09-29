@@ -5,30 +5,32 @@ export interface AddTodoAction {
     type: ADD_TODO;
     text: string;
 }
-export const addTodo = (text: string): AddTodoAction => ({
+export type AddTodoFunc = (text: string) => AddTodoAction;
+export const addTodo: AddTodoFunc = text => ({
     type: ADD_TODO,
     text
 });
 
-
 export type DELETE_TODO = 'DELETE_TODO';
 export const DELETE_TODO: DELETE_TODO = 'DELETE_TODO';
-export type DeleteTodoAction = {
-    type: DELETE_TODO,
+export interface DeleteTodoAction {
+    type: DELETE_TODO;
     id: number;
-};
-export const deleteTodo = (id: number): DeleteTodoAction => ({
+}
+export type DeleteTodoFunc = (id: number) => DeleteTodoAction;
+export const deleteTodo: DeleteTodoFunc = id => ({
     type: DELETE_TODO,
     id
 });
 
 export type COMPLETE_TODO = 'COMPLETE_TODO';
 export const COMPLETE_TODO: COMPLETE_TODO = 'COMPLETE_TODO';
-export type CompleteTodoAction = {
-    type: COMPLETE_TODO,
+export interface CompleteTodoAction {
+    type: COMPLETE_TODO;
     id: number;
-};
-export const completeTodo = (id: number): CompleteTodoAction => ({
+}
+export type CompleteTodoFunc = (id: number) => CompleteTodoAction;
+export const completeTodo: CompleteTodoFunc = id => ({
     type: COMPLETE_TODO,
     id
 });

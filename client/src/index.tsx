@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Store, createStore } from 'redux';
 
-import { createProvider } from './provider';
+import { createProvider } from './utils/provider';
 import { reducer } from './reducers';
 import { App } from './App';
 
