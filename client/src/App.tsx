@@ -3,7 +3,7 @@ import { connect, MapDispatchToPropsObject } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TodosState } from './state';
-import * as actions from './actions';
+import { addTodo, completeTodo, deleteTodo } from './actions';
 
 interface StateProps {
     todos: TodosState;
@@ -21,8 +21,9 @@ const mapStateToProps = (state: TodosState): StateProps => ({
     todos: state
 });
 
-const mapDispatchToProps = (dispatch: any) =>
-    bindActionCreators(actions as any, dispatch);
+const mapDispatchToProps = {
+    addTodo, completeTodo, deleteTodo
+};
 
 @connect<StateProps, DispatchProps, any>(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<Props, any> {
