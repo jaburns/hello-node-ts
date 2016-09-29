@@ -1,27 +1,24 @@
-import { Action } from 'redux-actions';
 
-export const ADD_TODO = 'ADD_TODO';
-export interface ADD_TODO { text: string; }
-
-export const addTodo = (text: string): Action<ADD_TODO> => ({
+export type ADD_TODO = 'ADD_TODO';
+export const ADD_TODO: ADD_TODO = 'ADD_TODO';
+export type AddTodoAction = {
     type: ADD_TODO,
-    payload: { text }
-});
+    text: string;
+};
 
-
-export const DELETE_TODO = 'DELETE_TODO';
-export interface DELETE_TODO { id: number; }
-
-export const deleteTodo = (id: number): Action<DELETE_TODO> => ({
+export type DELETE_TODO = 'DELETE_TODO';
+export const DELETE_TODO: DELETE_TODO = 'DELETE_TODO';
+export type DeleteTodoAction = {
     type: DELETE_TODO,
-    payload: { id }
-});
+    id: number;
+};
 
-
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export interface COMPLETE_TODO { id: number; }
-
-export const completeTodo = (id: number): Action<COMPLETE_TODO> => ({
+export type COMPLETE_TODO = 'COMPLETE_TODO';
+export const COMPLETE_TODO: COMPLETE_TODO = 'COMPLETE_TODO';
+export type CompleteTodoAction = {
     type: COMPLETE_TODO,
-    payload: { id }
-});
+    id: number;
+};
+
+export type OtherAction = { type: '' };
+export const OtherAction: OtherAction = { type: '' };
