@@ -3,7 +3,6 @@ import { connect, MapDispatchToPropsObject } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TodosState } from './state';
-
 import {
     addTodo, AddTodoFunc,
     completeTodo, CompleteTodoFunc,
@@ -20,15 +19,15 @@ interface DispatchProps {
     deleteTodo: DeleteTodoFunc;
 }
 
-export const App = connect(
-    (state: TodosState) => ({
-        todos: state
-    }),{
-        addTodo,
-        completeTodo,
-        deleteTodo
-    }
-)(_App);
+const mapStateToProps = (state: TodosState) => ({
+    todos: state
+});
+
+const mapDispatchToProps = {
+    addTodo,
+    completeTodo,
+    deleteTodo
+};
 
 class _App extends React.Component<StateProps & DispatchProps, any> {
     render() {
@@ -48,3 +47,5 @@ class _App extends React.Component<StateProps & DispatchProps, any> {
         </div>);
     }
 }
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(_App);
