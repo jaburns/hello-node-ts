@@ -29,7 +29,7 @@ const mapDispatchToProps = {
     deleteTodo
 };
 
-class _App extends React.Component<StateProps & DispatchProps, any> {
+class App extends React.Component<StateProps & DispatchProps, any> {
     render() {
         let vals = this.props.todos.map(todo => <div>
             <button onClick={() => this.props.deleteTodo(todo.id)}> X </button>
@@ -48,4 +48,4 @@ class _App extends React.Component<StateProps & DispatchProps, any> {
     }
 }
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(_App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

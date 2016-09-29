@@ -14,7 +14,7 @@ type PossibleAction =
   | CompleteTodoAction
   | OtherAction;
 
-export function reducer(state: TodosState = initialTodosState, action: PossibleAction): TodosState {
+export default function(state: TodosState = initialTodosState, action: PossibleAction): TodosState {
     switch (action.type) {
         case ADD_TODO:
             return [
