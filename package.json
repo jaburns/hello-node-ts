@@ -24,8 +24,8 @@
     "@types/react-redux": "^4.4.32",
     "@types/react-router": "^2.0.36",
     "@types/redux": "^3.5.30",
+    "awesome-typescript-loader": "^2.2.4",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
     "webpack": "^1.13.2"
   }
 }
