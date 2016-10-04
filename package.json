@@ -1,13 +1,14 @@
 {
-  "name": "test-typescript",
-  "version": "1.0.0",
-  "description": "",
+  "name": "typed-react-redux",
+  "version": "0.0.1",
+  "description": "Hello world.",
   "main": "server/src/index.js",
   "scripts": {
     "client": "cd client && webpack",
     "start": "pushd server && tsc && popd && node server/src/index.js"
   },
   "author": "jaburns",
+  "repository": "jaburns/typed-react-redux",
   "license": "MIT",
   "dependencies": {
     "express": "^4.14.0",
