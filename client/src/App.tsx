@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect, MapDispatchToPropsObject } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
 import { TodosState } from './state';
 import {
@@ -40,6 +41,7 @@ class App extends React.Component<StateProps & DispatchProps, any> {
 
         return (<div>
             <h1>Todo App</h1>
+            <Link to="/">Back to hello</Link>
             <button onClick={() => { this.props.addTodo('new TODO'); }}>
                 Add
             </button>

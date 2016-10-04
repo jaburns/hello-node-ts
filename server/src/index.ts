@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 
 const VIEW_ROUTES = [
-    '/', '/comments'
+    '/', '/todos'
 ];
 
 const clientPath = (p: string) =>
