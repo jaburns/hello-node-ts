@@ -5,7 +5,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 
 import createProvider from './utils/provider';
 import reducer from './reducers';
-import App from './App';
+import Todos from './Todos';
 
 const store = createStore(reducer);
 const Provider = createProvider();
@@ -19,7 +19,7 @@ const Hello = () =>
 const Root = () =>
     <Router history={browserHistory}>
         <Route path="/" component={Hello}/>
-        <Route path="/todos" component={App}/>
+        <Route path="/todos" component={Todos}/>
     </Router>;
 
 render(
