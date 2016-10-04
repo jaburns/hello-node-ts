@@ -40,7 +40,7 @@ class App extends React.Component<StateProps & DispatchProps, any> {
 
         return (<div>
             <h1>Todo App</h1>
-            <button onClick={() => { this.props.addTodo("new TODO"); }}>
+            <button onClick={() => { this.props.addTodo('new TODO'); }}>
                 Add
             </button>
             {vals}
