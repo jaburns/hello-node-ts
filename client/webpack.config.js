@@ -1,7 +1,10 @@
+const webpack = require("webpack");
+
 module.exports = {
     entry: "./src/index.tsx",
     output: {
-        filename: "./build/js/app.js",
+        path: "./build/js",
+        filename: "app.js",
     },
     devtool: "source-map",
     resolve: {
@@ -15,6 +18,9 @@ module.exports = {
             { test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+    plugins: [
+    //  new webpack.optimize.UglifyJsPlugin({minimize: true})
+    ],
     externals: {
         "react": "React",
         "react-dom": "ReactDOM",
