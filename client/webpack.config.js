@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.tsx',
+    entry: './src/index.ts',
     output: {
         path: './build/js',
         filename: 'app.js',
