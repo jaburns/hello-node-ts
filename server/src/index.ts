@@ -1,25 +1,20 @@
 import * as path from 'path';
 import * as express from 'express';
-import { Request, Response } from 'express';
 
-let VIEW_ROUTES: string[] = [
-    '/',
-    '/comments'
+const VIEW_ROUTES = [
+    '/', '/comments'
 ];
 
-function clientPath(p: string): string {
-    return path.join(__dirname + '/../../client/', p);
-}
+const clientPath = (p: string) =>
+    path.join(__dirname + '/../../client/', p);
 
-let app = express();
+const app = express();
 
-app.use(express['static'](clientPath('public')));
-app.use(express['static'](clientPath('build')));
+app.use(express.static(clientPath('public')));
+app.use(express.static(clientPath('build')));
 
-app.use(VIEW_ROUTES, function(req: Request, res: Response): void {
+app.use(VIEW_ROUTES, (req, res) => {
     res.sendFile(clientPath('public/index.html'));
 });
 
-app.listen(3000, function(): void {
-    console.log('Listening on 3000...');
-});
+app.listen(3000, () => console.log('Listening on 3000...'));
