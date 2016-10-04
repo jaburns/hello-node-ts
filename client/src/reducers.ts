@@ -1,4 +1,4 @@
-import { update } from '../../shared/utils';
+import * as assign from 'lodash/assign';
 import { initialTodosState, TodosState, TodoItemState } from './state';
 
 import {
@@ -34,7 +34,7 @@ export default function(state: TodosState = initialTodosState, action: PossibleA
         case COMPLETE_TODO:
             return state.map(todo =>
                 todo.id === action.id
-                ? update(todo, { completed: !todo.completed })
+                ? assign({}, todo, { completed: !todo.completed })
                 : todo
             );
 
