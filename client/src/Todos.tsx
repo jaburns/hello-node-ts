@@ -30,8 +30,8 @@ const mapDispatchToProps = {
     deleteTodo
 };
 
-const Todos = (props: StateProps & DispatchProps) => {
-    let vals = props.todos.map(todo => <div>
+export default connect(mapStateToProps, mapDispatchToProps)((props: StateProps & DispatchProps) => {
+    const vals = props.todos.map(todo => <div>
         <button onClick={() => props.deleteTodo(todo.id)}> X </button>
         <li onClick={() => props.completeTodo(todo.id)}>
             {todo.text + (todo.completed ? ' X': '')}
@@ -46,6 +46,4 @@ const Todos = (props: StateProps & DispatchProps) => {
         </button>
         {vals}
     </div>;
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+});

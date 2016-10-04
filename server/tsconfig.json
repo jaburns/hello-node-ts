@@ -3,7 +3,8 @@
     "target": "es6",
     "module": "commonjs",
     "noImplicitAny": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "strictNullChecks": true
   },
   "filesGlob": [
     "typings/index.d.ts",

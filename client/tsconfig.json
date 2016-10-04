@@ -4,6 +4,7 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "strictNullChecks": true,
     "jsx": "react"
   },
   "filesGlob": [

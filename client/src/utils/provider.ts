@@ -5,7 +5,7 @@ import { Store } from 'redux';
 
 export default function createProvider<P,S>() {
     interface ProviderProps<P> {
-        store: Store<S>,
+        store: Store<S | undefined>,
         target: React.ComponentClass<P> | React.SFC<P>
     }
 

@@ -1,5 +1,5 @@
 import * as assign from 'lodash/assign';
-import { initialTodosState, TodosState, TodoItemState } from './state';
+import { TodosState, TodoItemState } from './state';
 
 import {
     ADD_TODO, AddTodoAction,
@@ -14,7 +14,7 @@ type PossibleAction =
   | CompleteTodoAction
   | OtherAction;
 
-export default function(state: TodosState = initialTodosState, action: PossibleAction): TodosState {
+export default function(state: TodosState = [], action: PossibleAction): TodosState {
     switch (action.type) {
         case ADD_TODO:
             return [
