@@ -1,5 +1,6 @@
+import { Reducer, combineReducers } from 'redux';
 import * as assign from 'lodash/assign';
-import { TodosState, TodoItemState } from './state';
+import { TodosState, TodoItemState, Visibility } from './state';
 
 import {
     AddTodoAction,
@@ -8,18 +9,14 @@ import {
     OtherAction
 } from './actions';
 
-type PossibleAction =
-    AddTodoAction
-  | DeleteTodoAction
-  | CompleteTodoAction
-  | OtherAction;
+type TodoAction = AddTodoAction | DeleteTodoAction | CompleteTodoAction | OtherAction;
 
-export default function(state: TodosState = [], action: PossibleAction): TodosState {
+const todosReducer = (state: TodoItemState[] = [], action: TodoAction) :TodoItemState[] => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 {
-                    id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+                    id: action.id,
                     completed: false,
                     text: action.text
                 },
@@ -41,4 +38,15 @@ export default function(state: TodosState = [], action: PossibleAction): TodosSt
         default:
             return state;
     }
-}
+};
+
+type VisibilityAction = OtherAction;
+
+const visibilityFilterReducer = (state: Visibility = 'SHOW_ALL', action: VisibilityAction): Visibility => {
+    return state;
+};
+
+export default combineReducers<TodosState>({
+    todos: todosReducer,
+    visibilityFilter: visibilityFilterReducer
+});

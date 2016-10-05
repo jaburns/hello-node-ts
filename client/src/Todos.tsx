@@ -3,7 +3,7 @@ import { connect, MapDispatchToPropsObject } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import { TodosState } from './state';
+import { TodosState, TodoItemState } from './state';
 import {
     addTodo, AddTodoFunc,
     completeTodo, CompleteTodoFunc,
@@ -11,7 +11,7 @@ import {
 } from './actions';
 
 interface StateProps {
-    todos: TodosState;
+    todos: TodoItemState[];
 }
 
 interface DispatchProps {
@@ -21,7 +21,7 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: TodosState) => ({
-    todos: state
+    todos: state.todos
 });
 
 const mapDispatchToProps = {

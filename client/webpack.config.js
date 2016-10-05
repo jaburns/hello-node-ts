@@ -1,4 +1,5 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
+    , path = require('path')
 
 module.exports = {
     entry: './src/index.ts',
@@ -15,7 +16,13 @@ module.exports = {
             { test: /\.tsx?$/, loader: 'awesome-typescript-loader' }
         ],
         preLoaders: [
-            { test: /\.js$/, loader: 'source-map-loader' }
+            {
+                loader: 'source-map-loader' ,
+                test: /\.js$/,
+                exclude: [
+                    path.resolve('../node_modules/node-uuid')
+                ]
+            }
         ]
     },
     plugins: [

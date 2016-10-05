@@ -8,7 +8,6 @@
     "jsx": "react"
   },
   "filesGlob": [
-    "typings/index.d.ts",
     "src/**/*.tsx"
   ]
 }
