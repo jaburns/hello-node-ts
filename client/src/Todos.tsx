@@ -12,29 +12,7 @@ import {
     setVisibilityFilter, SetVisibilityFilterFunc
 } from './actions';
 
-interface StateProps {
-    todos: TodoItemState[];
-    visibilityFilter: Visibility;
-}
-
-interface DispatchProps {
-    addTodo: AddTodoFunc;
-    completeTodo: CompleteTodoFunc;
-    deleteTodo: DeleteTodoFunc;
-    setVisibilityFilter: SetVisibilityFilterFunc;
-}
-
-const mapStateToProps = (state: TodosState) => ({
-    todos: state.todos,
-    visibilityFilter: state.visibilityFilter
-});
-
-const mapDispatchToProps = {
-    addTodo,
-    completeTodo,
-    deleteTodo,
-    setVisibilityFilter
-};
+// ------------------------------------------------------------------------------------
 
 const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoItemState[] => {
     switch (visibility) {
@@ -47,72 +25,92 @@ const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoIt
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)((props: StateProps & DispatchProps) =>
-    <div>
-        <h1>Todo App</h1>
-        <p><Link to="/">Back to hello</Link></p>
+// ------------------------------------------------------------------------------------
 
-        <AddTodo onAddClick={props.addTodo} />
-        <TodoList todos={getVisibleTodos(props.todos, props.visibilityFilter)} onTodoClick={props.completeTodo} />
-        <Footer visibilityFilter={props.visibilityFilter} onFilterClick={props.setVisibilityFilter} />
-    </div>
-);
+interface TodosProps {
+    todos: TodoItemState[];
+    visibilityFilter: Visibility;
+
+    addTodo: AddTodoFunc;
+    completeTodo: CompleteTodoFunc;
+    deleteTodo: DeleteTodoFunc;
+}
+
+const Todos = (() => {
+    const mapState = (state: TodosState) => ({
+        todos: state.todos,
+        visibilityFilter: state.visibilityFilter
+    });
+
+    const mapDispatch = {
+        addTodo,
+        completeTodo,
+        deleteTodo,
+    };
+
+    return connect(mapState, mapDispatch)((props: TodosProps) =>
+        <div>
+            <h1>Todo App</h1>
+            <p><Link to="/">Back to hello</Link></p>
+
+            <AddTodo onAddClick={props.addTodo} />
+            <TodoList todos={getVisibleTodos(props.todos, props.visibilityFilter)} onTodoClick={props.completeTodo} />
+            <Footer />
+        </div>
+    );
+})();
+
+export default Todos;
 
 // ------------------------------------------------------------------------------------
 
-interface FooterProps {
-    visibilityFilter: Visibility,
-    onFilterClick: (v:Visibility) => void
-};
-
-const Footer = (props: FooterProps) =>
+const Footer = () =>
     <p>
         Show:
         {' '}
-        <FilterLink
-            filter="SHOW_ACTIVE"
-            currentFilter={props.visibilityFilter}
-            onClick={() => { props.onFilterClick('SHOW_ACTIVE'); }}>
-                Active
-        </FilterLink>
+        <FilterLink filter="SHOW_ACTIVE">Active</FilterLink>
         {', '}
-        <FilterLink
-            filter="SHOW_COMPLETED"
-            currentFilter={props.visibilityFilter}
-            onClick={() => { props.onFilterClick('SHOW_COMPLETED'); }}>
-                Completed
-        </FilterLink>
+        <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
         {', '}
-        <FilterLink
-            filter="SHOW_ALL"
-            currentFilter={props.visibilityFilter}
-            onClick={() => { props.onFilterClick('SHOW_ALL'); }}>
-                All
-        </FilterLink>
+        <FilterLink filter="SHOW_ALL">All</FilterLink>
     </p>
 
 // ------------------------------------------------------------------------------------
 
-interface FilterLinkProps {
-    filter: Visibility,
-    currentFilter: Visibility,
-    children?: ReactNode,
-    onClick: () => void
-};
+interface FilterLinkOwnProps {
+    filter: Visibility
+}
 
-const FilterLink = (props: FilterLinkProps) => {
-    if (props.filter === props.currentFilter) {
-        return <span>{props.children}</span>
-    }
-    return <a
-        href="#"
-        onClick={e => {
-            e.preventDefault();
-            props.onClick();
-        }}>
-            {props.children}
-    </a>
-};
+interface FilterLinkProps {
+    active: boolean;
+    children?: ReactNode;
+
+    setVisibilityFilter: SetVisibilityFilterFunc;
+}
+
+const FilterLink = (() => {
+    const mapState = (state: TodosState, ownProps: FilterLinkOwnProps) => ({
+        active: state.visibilityFilter === ownProps.filter
+    });
+
+    const mapDispatch = {
+        setVisibilityFilter
+    };
+
+    return connect(mapState, mapDispatch)((props: FilterLinkProps & FilterLinkOwnProps) => {
+        if (props.active) {
+            return <span>{props.children}</span>
+        }
+        return <a
+            href="#"
+            onClick={e => {
+                e.preventDefault();
+                props.setVisibilityFilter(props.filter);
+            }}>
+                {props.children}
+        </a>
+    });
+})();
 
 // ------------------------------------------------------------------------------------
 
