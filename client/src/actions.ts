@@ -1,4 +1,4 @@
-import { genV4 } from 'uuid';
+import { Visibility } from './state';
 
 export type OtherAction = { type: '' };
 export const OtherAction: OtherAction = { type: '' };
@@ -12,7 +12,7 @@ export interface AddTodoAction {
 export type AddTodoFunc = (text: string) => AddTodoAction;
 export const addTodo: AddTodoFunc = text => ({
     type: 'ADD_TODO',
-    id: genV4().hexString,
+    id: Math.random().toString(36).substr(2),
     text
 });
 
@@ -38,6 +38,18 @@ export type CompleteTodoFunc = (id: string) => CompleteTodoAction;
 export const completeTodo: CompleteTodoFunc = id => ({
     type: 'COMPLETE_TODO',
     id
+});
+
+
+export interface SetVisibilityFilterAction {
+    type: 'SET_VISIBILITY_FILTER';
+    visibility: Visibility;
+}
+
+export type SetVisibilityFilterFunc = (visibility: Visibility) => SetVisibilityFilterAction;
+export const setVisibilityFilter: SetVisibilityFilterFunc = visibility => ({
+    type: 'SET_VISIBILITY_FILTER',
+    visibility
 });
 
 

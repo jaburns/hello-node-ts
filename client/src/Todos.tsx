@@ -7,7 +7,8 @@ import { TodosState, TodoItemState } from './state';
 import {
     addTodo, AddTodoFunc,
     completeTodo, CompleteTodoFunc,
-    deleteTodo, DeleteTodoFunc
+    deleteTodo, DeleteTodoFunc,
+    setVisibilityFilter, SetVisibilityFilterFunc
 } from './actions';
 
 interface StateProps {
@@ -18,6 +19,7 @@ interface DispatchProps {
     addTodo: AddTodoFunc;
     completeTodo: CompleteTodoFunc;
     deleteTodo: DeleteTodoFunc;
+    setVisibilityFilter: SetVisibilityFilterFunc;
 }
 
 const mapStateToProps = (state: TodosState) => ({
@@ -27,7 +29,8 @@ const mapStateToProps = (state: TodosState) => ({
 const mapDispatchToProps = {
     addTodo,
     completeTodo,
-    deleteTodo
+    deleteTodo,
+    setVisibilityFilter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)((props: StateProps & DispatchProps) => {
@@ -44,6 +47,7 @@ export default connect(mapStateToProps, mapDispatchToProps)((props: StateProps &
         <button onClick={() => { props.addTodo('new TODO'); }}>
             Add
         </button>
+        <a onClick={() => { props.setVisibilityFilter('SHOW_ACTIVE'); }}>Active</a>
         {vals}
     </div>;
 });
