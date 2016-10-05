@@ -16,13 +16,7 @@ module.exports = {
             { test: /\.tsx?$/, loader: 'awesome-typescript-loader' }
         ],
         preLoaders: [
-            {
-                loader: 'source-map-loader' ,
-                test: /\.js$/,
-                exclude: [
-                    path.resolve('../node_modules/node-uuid')
-                ]
-            }
+            { test: /\.js$/, loader: 'source-map-loader' }
         ]
     },
     plugins: [
