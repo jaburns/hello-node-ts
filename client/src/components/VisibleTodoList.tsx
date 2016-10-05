@@ -2,16 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { TodosState, TodoItemState, Visibility } from '../state';
-import { completeTodo, CompleteTodoFunc, } from '../actions';
+import { completeTodo, CompleteTodoFunc } from '../actions';
 
 
 const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoItemState[] => {
     switch (visibility) {
-        case 'SHOW_ALL':
+        case 'all':
             return todos;
-        case 'SHOW_ACTIVE':
+        case 'active':
             return todos.filter(t => !t.completed);
-        case 'SHOW_COMPLETED':
+        case 'completed':
             return todos.filter(t =>  t.completed);
     }
 };
@@ -29,26 +29,26 @@ const Todo = (props: TodoProps) =>
             {props.text}
     </li>;
 
+interface VisibleTodoListConf {
+    filter: Visibility
+}
+
 interface VisibleTodoListProps {
     todos: TodoItemState[];
-    visibilityFilter: Visibility;
     completeTodo: CompleteTodoFunc;
 }
 
-const mapState = (state: TodosState) => ({
-    todos: state.todos,
-    visibilityFilter: state.visibilityFilter
+const mapState = (state: TodosState, ownProps: VisibleTodoListConf) => ({
+    todos: getVisibleTodos(state.todos, ownProps.filter)
 });
 
 const mapDispatch = {
     completeTodo
 };
 
-export default connect(mapState, mapDispatch)((props: VisibleTodoListProps) => {
-    const visibleTodos = getVisibleTodos(props.todos, props.visibilityFilter);
-
+export default connect(mapState, mapDispatch)((props: VisibleTodoListProps & VisibleTodoListConf) => {
     return <ul>
-        {visibleTodos.map(todo =>
+        {props.todos.map(todo =>
             <Todo
                 key={todo.id}
                 {...todo}

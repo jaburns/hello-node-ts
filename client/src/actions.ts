@@ -39,17 +39,3 @@ export const completeTodo: CompleteTodoFunc = id => ({
     type: 'COMPLETE_TODO',
     id
 });
-
-
-export interface SetVisibilityFilterAction {
-    type: 'SET_VISIBILITY_FILTER';
-    visibility: Visibility;
-}
-
-export type SetVisibilityFilterFunc = (visibility: Visibility) => SetVisibilityFilterAction;
-export const setVisibilityFilter: SetVisibilityFilterFunc = visibility => ({
-    type: 'SET_VISIBILITY_FILTER',
-    visibility
-});
-
-

@@ -1,12 +1,16 @@
 
-export type Visibility =
-    'SHOW_ALL'
-  | 'SHOW_COMPLETED'
-  | 'SHOW_ACTIVE';
+export type Visibility = 'all' | 'completed' | 'active';
+
+export const stringToVisibility = (input: string): Visibility => {
+    switch(input) {
+        case 'completed': return 'completed';
+        case 'active': return 'active';
+        default: return 'all';
+    }
+}
 
 export interface TodosState {
     todos: TodoItemState[];
-    visibilityFilter: Visibility;
 }
 
 export interface TodoItemState {

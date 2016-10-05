@@ -6,7 +6,6 @@ import {
     AddTodoAction,
     DeleteTodoAction,
     CompleteTodoAction,
-    SetVisibilityFilterAction,
     OtherAction
 } from './actions';
 
@@ -41,19 +40,6 @@ const todosReducer = (state: TodoItemState[] = [], action: TodoAction) :TodoItem
     }
 };
 
-type VisibilityAction = SetVisibilityFilterAction | OtherAction;
-
-const visibilityFilterReducer = (state: Visibility = 'SHOW_ALL', action: VisibilityAction): Visibility => {
-    switch (action.type) {
-        case 'SET_VISIBILITY_FILTER':
-            return action.visibility
-
-        default:
-            return state;
-    }
-};
-
 export default combineReducers<TodosState>({
-    todos: todosReducer,
-    visibilityFilter: visibilityFilterReducer
+    todos: todosReducer
 });
