@@ -2,9 +2,9 @@ import * as assign from 'lodash/assign';
 import { TodosState, TodoItemState } from './state';
 
 import {
-    ADD_TODO, AddTodoAction,
-    DELETE_TODO, DeleteTodoAction,
-    COMPLETE_TODO, CompleteTodoAction,
+    AddTodoAction,
+    DeleteTodoAction,
+    CompleteTodoAction,
     OtherAction
 } from './actions';
 
@@ -16,7 +16,7 @@ type PossibleAction =
 
 export default function(state: TodosState = [], action: PossibleAction): TodosState {
     switch (action.type) {
-        case ADD_TODO:
+        case 'ADD_TODO':
             return [
                 {
                     id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
@@ -26,12 +26,12 @@ export default function(state: TodosState = [], action: PossibleAction): TodosSt
                 ...state
             ];
 
-        case DELETE_TODO:
+        case 'DELETE_TODO':
             return state.filter(todo =>
                 todo.id !== action.id
             );
 
-        case COMPLETE_TODO:
+        case 'COMPLETE_TODO':
             return state.map(todo =>
                 todo.id === action.id
                 ? assign({}, todo, { completed: !todo.completed })

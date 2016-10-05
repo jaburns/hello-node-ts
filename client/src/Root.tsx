@@ -18,4 +18,4 @@ export default (props: {store: Store<TodosState | undefined>}) =>
             <Route path="/" component={Hello}/>
             <Route path="/todos" component={Todos}/>
         </Router>
-    </Provider>
+    </Provider>;
