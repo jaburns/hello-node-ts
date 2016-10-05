@@ -1,8 +1,7 @@
-// const { v4 } = require('node-uuid');
+import { genV4 } from 'uuid';
 
 export type OtherAction = { type: '' };
 export const OtherAction: OtherAction = { type: '' };
-
 
 export interface AddTodoAction {
     type: 'ADD_TODO';
@@ -13,7 +12,7 @@ export interface AddTodoAction {
 export type AddTodoFunc = (text: string) => AddTodoAction;
 export const addTodo: AddTodoFunc = text => ({
     type: 'ADD_TODO',
-    id: Math.random().toString().substr(2),
+    id: genV4().hexString,
     text
 });
 
