@@ -1,7 +1,9 @@
+/// <reference path="../../../typedefs/npm-react-router/react-router.d.ts" />
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Router, withRouter, IInjectedProps } from 'react-router';
 
-import { TodosState, TodoItemState, Visibility } from '../state';
+import { TodosState, TodoItemState, Visibility, stringToVisibility } from '../state';
 import { completeTodo, CompleteTodoFunc } from '../actions';
 
 
@@ -29,24 +31,23 @@ const Todo = (props: TodoProps) =>
             {props.text}
     </li>;
 
-interface VisibleTodoListConf {
-    filter: Visibility
-}
-
 interface VisibleTodoListProps {
     todos: TodoItemState[];
     completeTodo: CompleteTodoFunc;
 }
 
-const mapState = (state: TodosState, ownProps: VisibleTodoListConf) => ({
-    todos: getVisibleTodos(state.todos, ownProps.filter)
+const mapState = (state: TodosState, ownProps: IInjectedProps) => ({
+    todos: getVisibleTodos(
+        state.todos,
+        stringToVisibility(ownProps.params ? ownProps.params['filter'] : '')
+    )
 });
 
 const mapDispatch = {
     completeTodo
 };
 
-export default connect(mapState, mapDispatch)((props: VisibleTodoListProps & VisibleTodoListConf) => {
+export default withRouter(connect(mapState, mapDispatch)((props: VisibleTodoListProps) => {
     return <ul>
         {props.todos.map(todo =>
             <Todo
@@ -55,4 +56,4 @@ export default connect(mapState, mapDispatch)((props: VisibleTodoListProps & Vis
                 onClick={() => props.completeTodo(todo.id)} />
         )}
     </ul>;
-});
+}));
