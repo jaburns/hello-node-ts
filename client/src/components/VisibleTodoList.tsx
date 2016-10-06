@@ -5,6 +5,7 @@ import { withRouter, RouterProps } from '../typefix/react-redux';
 
 import { TodosState, TodoItemState, Visibility, stringToVisibility } from '../state';
 import { completeTodo, CompleteTodoFunc } from '../actions';
+import TodoList, { TodoListProps } from './TodoList'
 
 
 const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoItemState[] => {
@@ -18,23 +19,6 @@ const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoIt
     }
 };
 
-interface TodoProps {
-    onClick: () => void;
-    completed: boolean;
-    text: string;
-}
-
-const Todo = (props: TodoProps) =>
-    <li
-        onClick={props.onClick}
-        style={{ textDecoration: props.completed ? 'line-through' : 'none' }}>
-            {props.text}
-    </li>;
-
-interface VisibleTodoListProps {
-    todos: TodoItemState[];
-    completeTodo: CompleteTodoFunc;
-}
 
 const mapState = (state: TodosState, ownProps: RouterProps) => ({
     todos: getVisibleTodos(
@@ -44,16 +28,7 @@ const mapState = (state: TodosState, ownProps: RouterProps) => ({
 });
 
 const mapDispatch = {
-    completeTodo
+    onTodoClick: completeTodo
 };
 
-export default withRouter<{}>(connect(mapState, mapDispatch)((props: VisibleTodoListProps) => {
-    return <ul>
-        {props.todos.map(todo =>
-            <Todo
-                key={todo.id}
-                {...todo}
-                onClick={() => props.completeTodo(todo.id)} />
-        )}
-    </ul>;
-}));
+export default withRouter<{}>(connect(mapState, mapDispatch)(TodoList));
