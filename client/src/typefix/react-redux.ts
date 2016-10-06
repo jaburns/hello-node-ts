@@ -5,6 +5,7 @@ export interface RouterProps {
     params: Router.Params
 }
 
-export function withRouter<P>(component: React.ComponentClass<P & RouterProps>): React.ComponentClass<P> {
-    return (withRouter as any)(component);
-}
+export const withRouter:
+    <P>(component: React.ComponentClass<P & RouterProps>)
+        => React.ComponentClass<P>
+    = rawWithRouter;
