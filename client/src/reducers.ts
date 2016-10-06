@@ -40,6 +40,17 @@ const todosReducer = (state: TodoItemState[] = [], action: TodoAction) :TodoItem
     }
 };
 
+export const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoItemState[] => {
+    switch (visibility) {
+        case 'all':
+            return todos;
+        case 'active':
+            return todos.filter(t => !t.completed);
+        case 'completed':
+            return todos.filter(t =>  t.completed);
+    }
+};
+
 export default combineReducers<TodosState>({
     todos: todosReducer
 });

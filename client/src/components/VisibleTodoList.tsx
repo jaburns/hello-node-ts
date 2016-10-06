@@ -1,23 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Router } from 'react-router';
 import { withRouter, RouterProps } from '../typefix/react-redux';
 
-import { TodosState, TodoItemState, Visibility, stringToVisibility } from '../state';
-import { completeTodo, CompleteTodoFunc } from '../actions';
-import TodoList, { TodoListProps } from './TodoList'
-
-
-const getVisibleTodos = (todos: TodoItemState[], visibility: Visibility) :TodoItemState[] => {
-    switch (visibility) {
-        case 'all':
-            return todos;
-        case 'active':
-            return todos.filter(t => !t.completed);
-        case 'completed':
-            return todos.filter(t =>  t.completed);
-    }
-};
+import { TodosState, stringToVisibility } from '../state';
+import { completeTodo } from '../actions';
+import TodoList, { TodoListProps } from './TodoList';
+import { getVisibleTodos } from '../reducers';
 
 
 const mapState = (state: TodosState, ownProps: RouterProps) => ({
